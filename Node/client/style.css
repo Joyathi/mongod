@@ -1,0 +1,12 @@
+
+body{
+    background-color: orange;
+}
+ 
+.form{
+    /* flex-direction: column; */
+    width: fit-content;
+    margin: auto;
+    font-size: larger;
+    
+}
