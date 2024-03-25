@@ -23,8 +23,6 @@ async function connect() {
     return 'done.';
 }
 
-
-
 const server = http.createServer(async (req, res) => {
 
     const db = client.db(dbName);
@@ -47,10 +45,10 @@ const server = http.createServer(async (req, res) => {
         res.end(fs.readFileSync('../client/script.js'));
     }else if (parsed_url.pathname === '/addData.html' && req.method === 'GET') {
         res.writeHead(200, { 'Content-Type': "text/html" });
-        res.end(fs.readFileSync('../client/script.js'));
+        res.end(fs.readFileSync('../client/addData.html'));
     }else if (parsed_url.pathname === '/getdata.html' && req.method === 'GET') {
         res.writeHead(200, { 'Content-Type': "text/html" });
-        res.end(fs.readFileSync('../client/script.js'));
+        res.end(fs.readFileSync('../client/getdata.html'));
     }else if (parsed_url.pathname === '/script.js' && req.method === 'GET') {
         res.writeHead(200, { 'Content-Type': "text/javascript " });
         res.end(fs.readFileSync('../client/script.js'));
