@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: bisque;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    margin: auto;
+    margin-top: 30vh;
+    font-size: large;
+    font-size: 24px;
+}
+table{
+    margin: auto;
+}
+table,th,td{
+    border: 2px solid black;
+    border-collapse: collapse;
+    padding: 20px;
+}
