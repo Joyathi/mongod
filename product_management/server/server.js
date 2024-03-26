@@ -1,5 +1,4 @@
-//Explain what is a REST API before starting express
-//Explain what is express
+
 const { error } = require("console");
 const express = require("express");
 const app = express();
@@ -8,38 +7,37 @@ const fs = require("fs");
 const path = require("path");
 
 console.log(__dirname);
-//Server static files
-app.use("/", express.static(__dirproductname + "/../client"));
 
-//Middleware to parse formData
+app.use("/", express.static(__dirname + "/../client"));
+
+
 app.use(express.urlencoded({ extended: true }));
 
-//Middleware to parse JSON
+
 app.use(express.json());
 
-//Test api
+
 app.get('/test',(req,res,next)=> {
-  // res.status(200).send("Success");
+  
   next();
 },(req,res)=> {
   res.status(200).send("success1");
 });
 
-//Route to handle form submission
 app.post("/submit", (req, res) => {
   const body = req.body;
   console.log("body : ", body);
 
-  const folderPath = "./products"; //Path to the folder
-  const fileproductname = "products.json";
-  const filePath = path.join(folderPath, fileproductname);
+  const folderPath = "./product";
+  const filename = "product.json";
+  const filePath = path.join(folderPath, filename);
 
-  //Create folder if its not exists
+  
   if (!fs.existsSync(folderPath)) {
     fs.mkdirSync(folderPath, { recursive: true });
   }
   
-  //Get datas from the file
+
   const fileContent = fs.readFileSync(filePath, "utf-8");
   console.log("fileContent : ", fileContent);
   console.log("typeof(fileContent) : ", typeof fileContent);
@@ -47,11 +45,11 @@ app.post("/submit", (req, res) => {
   if (fileContent === "") {
     console.log("File is empty");
 
-    //   Write data to the file
+   
     let dataArr = [];
     dataArr.push(body);
 
-    //Converting to json
+   
     let data = JSON.stringify(dataArr);
     console.log("data : ", data);
 
@@ -65,23 +63,23 @@ app.post("/submit", (req, res) => {
       }
     });
   } else {
-      let existingproducts = fileContent;
-      console.log("existingproducts : ", existingproducts);
+      let existingname = fileContent;
+      console.log("existingname : ", existingname);
 
-      let parsedproducts = JSON.parse(existingproducts);
-      console.log("parsedproducts : ", parsedproducts);
+      let parsedname = JSON.parse(existingname);
+      console.log("parsedname : ", parsedname);
 
       parsedDatas.push(body);
 
-      let updatedproducts = JSON.stringify(parsedDatas);
-    //Append json data to the file
-    fs.writeFile(filePath, updatedproducts, (err) => {
+      let updatedproduct = JSON.stringify(parsedDatas);
+   
+    fs.writeFile(filePath, updatedproduct, (err) => {
       if (err) {
         console.log("err : ", error);
         res.status(400).send("failed");
       } else {
         console.log("Success");
-          //Also save to a database
+        
         res.status(200).send("success");
       }
     });
@@ -91,9 +89,9 @@ app.post("/submit", (req, res) => {
 
 app.get('/getproduct',(req, res)=> {
 
-    const folderPath = "./products"; //Path to the folder
-    const fileproductname = "products.json";
-    const filePath = path.join(folderPath, fileproductname);
+    const folderPath = "./products"; 
+    const filename = "products.json";
+    const filePath = path.join(folderPath, filename);
 
     
     let fileContent = fs.readFileSync(filePath,"utf-8");
