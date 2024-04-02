@@ -18,9 +18,9 @@ db.once('open', () => {
 const userSchema = new mongoose.Schema({
     product: String,
     category: String,
-    prise: number,
-    size:String,
-    quantity:number,
+    prise: Number,
+    size:Number,
+    quantity:Number
 });
 
 const UserModel = mongoose.model('product', userSchema);
@@ -36,7 +36,7 @@ function startServer() {
     
     app.post('/submit', async (req, res) => {
         try {
-            const formData = req.body;
+            const productData = req.body;
             console.log('Received data:', productData);
             const user = new UserModel(productData);
             await user.save();
@@ -50,9 +50,9 @@ function startServer() {
     
     app.get('/getData', async (req, res) => {
         try {
-            const formDataArray = await UserModel.find();
+            const productDataArray = await UserModel.find();
 
-            res.status(200).json(formDataArray);
+            res.status(200).json(productDataArray);
         } catch (error) {
             console.error('Error:', error);
             res.status(500).send('Internal Server Error');
@@ -72,12 +72,17 @@ function startServer() {
     });
        //edit product data
     
-    app.put('/editData', async (req, res) => {
+    app.put('/editData/:id', async (req, res) => {
         try {
-            const { id, product, category, prise,size,quantity } = req.body;
+            const id =req.params.id;
+            const { product, category, prise,size,quantity } = req.body;
 
          //update product data by finding and updating document
-            await UserModel.findByIdAndUpdate(id, { product, category, prise,size, });
+           const updateproduct = await UserModel.findByIdAndUpdate(id, { product, category, prise,size, });
+
+            if(!updateproduct){
+                return res.status(404).send('product not found')
+            }
 
             res.status(200).send('Success');
         } catch (error) {
@@ -93,7 +98,7 @@ function startServer() {
 
 //delete user data
 
-            await UserModel.findByIdAndRemove(id);
+            await UserModel.findByIdAndDelete(id);
 
             res.status(200).send('Success');
         } catch (error) {
