@@ -5,7 +5,7 @@ const app = express();
 const port = 4000;
 
 
-mongoose.connect('mongodb://127.0.0.1:27017/ums', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://127.0.0.1:27017/pms', { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -20,13 +20,14 @@ const userSchema = new mongoose.Schema({
     category: String,
     prise: number,
     size:String,
+    quantity:number,
 });
 
-const UserModel = mongoose.model('User', userSchema);
+const UserModel = mongoose.model('product', userSchema);
 
 function startServer() {
    
-    app.use(express.json());
+    
     app.use(express.urlencoded({ extended: true }));
 
     
@@ -36,15 +37,10 @@ function startServer() {
     app.post('/submit', async (req, res) => {
         try {
             const formData = req.body;
-            console.log('Received data:', formData);
-
-            
-            const user = new UserModel(formData);
-
-            
+            console.log('Received data:', productData);
+            const user = new UserModel(productData);
             await user.save();
-
-            res.status(200).send('Form submitted successfully!');
+            res.status(200).send('data added successfully!');
         } catch (error) {
             console.error('Error:', error);
             res.status(500).send('Internal Server Error');
@@ -52,7 +48,7 @@ function startServer() {
     });
 
     
-    app.get('/getFormData', async (req, res) => {
+    app.get('/getData', async (req, res) => {
         try {
             const formDataArray = await UserModel.find();
 
@@ -63,26 +59,25 @@ function startServer() {
         }
     });
 
-   
-    app.get('/getSingleUserData/:id', async (req, res) => {
+   //get single user data
+    app.get('/getSingleproductData/:id', async (req, res) => {
         try {
             const id = req.params.id;
-            const formData = await UserModel.findById(id);
-
-            res.status(200).json(formData);
+            const singleproduct = await UserModel.findById(id);
+             res.status(200).json(formData);
         } catch (error) {
             console.error('Error:', error);
             res.status(500).send('Internal Server Error');
         }
     });
-
+       //edit product data
     
     app.put('/editData', async (req, res) => {
         try {
-            const { id, product, category, prise,size } = req.body;
+            const { id, product, category, prise,size,quantity } = req.body;
 
-         
-            await UserModel.findByIdAndUpdate(id, { product, category, prise,size });
+         //update product data by finding and updating document
+            await UserModel.findByIdAndUpdate(id, { product, category, prise,size, });
 
             res.status(200).send('Success');
         } catch (error) {
@@ -90,13 +85,14 @@ function startServer() {
             res.status(500).send('Internal Server Error');
         }
     });
-
+           //delete product data
     
     app.delete('/deleteData', async (req, res) => {
         try {
             const id = req.body.id;
 
-            
+//delete user data
+
             await UserModel.findByIdAndRemove(id);
 
             res.status(200).send('Success');
