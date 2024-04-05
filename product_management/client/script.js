@@ -23,9 +23,14 @@ for(let i=0; i<parsed_user_data.length; i++) {
     dataComponent = dataComponent + `
     <tr>
     <td>${parsed_user_data[i]._id}</td>
-    <td><input type="text" productname="productname" id="name-${parsed_user_data[i]._id}" value="${parsed_user_data[i].productname}" disabled="true"></td>
+    <td><input type="product" name="product" id="product-${parsed_user_data[i]._id}" value="${parsed_user_data[i].product}" disabled="true"></td>
     <td><input type="category" name="category" id="category-${parsed_user_data[i]._id}" value="${parsed_user_data[i].category}" disabled="true"></td>
-    <td><input type="password" name="prise" id="password-${parsed_user_data[i]._id}" value="${parsed_user_data[i].prise}" disabled="true"></td>
+    <td><input type="prise" name="prise" id="prise-${parsed_user_data[i]._id}" value="${parsed_user_data[i].prise}" disabled="true"></td>
+    <td><input type="size" name="size" id="size-${parsed_user_data[i]._id}" value="${parsed_user_data[i].size}" disabled="true"></td>
+    <td><input type="category" name="category" id="category-${parsed_user_data[i]._id}" value="${parsed_user_data[i].prise}" disabled="true"></td>
+     
+
+
     <td><button onclick="handleEdit('${parsed_user_data[i]._id}')">Edit</button></td>
     <td><button onclick="handleSave('${parsed_user_data[i]._id}')">Save</button></td>
     <td><button onclick="handleDelete('${parsed_user_data[i]._id}')">Delete</button></td>
