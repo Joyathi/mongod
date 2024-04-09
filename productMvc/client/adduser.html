@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="style.css">
+<body>
+    <form >
+        <h2>REGISTRATION FORM</h2>
+
+         <!-- text input -->
+         <div id="product-group">
+            <label for="product">Product</label>
+            <input type="text" id="product" name="product" onkeyup="validateproduct()" required>
+            <div id="product.error"></div>
+         </div>
+
+         <div id="category-group">
+            <label for="category">category </label>
+            <input type="text" id="category" name="category" onkeyup="validatecategory()" required>
+            <div id="laststname.error"></div>
+         </div>
+
+         <!-- prise input -->
+         <div id="prise-group">
+            <label for="prise">Prise</label>
+            <input type="text" id="prise" name="prise" onkeyup="validateprise()" required>
+            <div id="prise.error"></div>
+         </div>
+
+         <!-- size input -->
+         <div id="size">
+            <label for="size">size</label>
+            <input type="text" id="size" name="size" onkeyup="validatesize()" required>
+            <div id="size.error"></div>
+         </div>
+
+         <div id="quantity">
+            <label for="quantity">quantity</label>
+            <input type="text" id="quantity" name="quantity" onkeyup="validatequantity()" required>
+            <div id="size.error"></div>
+         </div>
+
+         <!-- submit button -->
+         <button type="button" onclick="submitFrom()">submit</button>
+
+    </form> 
+    <script src="script.js"></script>
+</body>
+</html>
