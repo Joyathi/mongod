@@ -11,6 +11,42 @@ exports.createUser = async function (req, res){
         const password = req.body.password
         console.log("password :",password)
 
+        //validations
+
+        if(!firstname){
+            let response=error_function({
+                statuscode :401,
+                message:"first name is required"
+            });
+            res.status(400).send(response);
+            return;
+        }
+        else if (!lastname){
+            let response=error_function({
+                statuscode:401,
+                meassage:"last name is required"
+            });
+            res.status(400).send(response);
+            return;
+        }
+        else if (!email){
+            let response=error_function({
+                statuscode:401,
+                meassage:"email is requiresd"
+            });
+            res.status(400).send(response);
+            return;
+        }
+        else if (!password){
+            let response=error_function({
+                statuscode:401,
+                meassage:"password is requiresd"
+            });
+            res.status(400).send(response);
+            return;
+        }
+        
+
         let email_count = await users.countDocuments({email});
         if (email_count > 0){
 
@@ -21,6 +57,9 @@ exports.createUser = async function (req, res){
             res.status(400).send(response);
             return;
         }
+        let firstname_regexp = /^[A-Z]([a-zA-Z]{2,30})?$/;
+        let validFirstname
+        
         const new_user = new users({
             firstname :firstname,
             lastname :lastname,
@@ -125,11 +164,8 @@ try{
         res.status(400).send("User ID is required")
         return;
     }
-    if(!updateData || Object.keys(updateData).length===0){
-        res.status(400).send("Updated data is required");
-        return;
-    }
-    const user = await users.findById(userId);
+
+    const users = await users.findById(userId);
 
     if(!user){
         res.status(404).send("User not found");
@@ -138,7 +174,15 @@ try{
     for(let key in updatedData){
         user[key]=updatedData[key]
     }
-    const updatedUser await user.save();
+    const updatedUser =await user.save();
+}
+catch(error){
+    let response ={
+        statuscode :500,
+        message:"internal server Error",
+    };
+    console.log("error :",error);
+    res.status(500).send(response)
 }
 
 }
