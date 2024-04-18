@@ -18,31 +18,31 @@ exports.createUser = async function (req, res){
                 statuscode :401,
                 message:"first name is required"
             });
-            res.status(400).send(response);
+            res.status(401).send(response);
             return;
         }
-        else if (!lastname){
+        if (!lastname){
             let response=error_function({
                 statuscode:401,
                 meassage:"last name is required"
             });
-            res.status(400).send(response);
+            res.status(401).send(response);
             return;
         }
-        else if (!email){
+        if (!email){
             let response=error_function({
                 statuscode:401,
                 meassage:"email is requiresd"
             });
-            res.status(400).send(response);
+            res.status(401).send(response);
             return;
         }
-        else if (!password){
+        if (!password){
             let response=error_function({
                 statuscode:401,
                 meassage:"password is requiresd"
             });
-            res.status(400).send(response);
+            res.status(401).send(response);
             return;
         }
         
@@ -57,51 +57,45 @@ exports.createUser = async function (req, res){
             res.status(400).send(response);
             return;
         }
-        let firstname_regexp = /^[A-Z]([a-zA-Z]{2,30})?$/;
-        let validFirstName =firstname_regexp.test(firstname);
+        // let firstname_regexp = /^[A-Z]([a-zA-Z]{2,30})?$/;
+        // let validFirstName =firstname_regexp.test(firstname);
         
-        if (!validFirstName){
-            let response = error_function({
-                statuscode :401,
-                message : "first name is invalid"
-            });
-            res.status(400).send(response);
-            return;
-        }
+        // if (!validFirstName){
+        //     let response = error_function({
+        //         statuscode :401,
+        //         message : "first name is invalid"
+        //     });
+        //     res.status(401).send(response);
+        //     return;
+        // }
 
         if (firstname.length < 2){
             let response = error_function({
                 statuscode :401,
                 message:"first name is too short"
             });
-            res.status(400).send (response);
+            res.status(401).send (response);
             return;
         }
         
         if (firstname.length >30){
             let response  = error_function({
-                statuscode :401,
+                statuscode :400,
                 message:"first name is too long"
             });
             res.status(400).send(response);
             return;
         }
-        if(firstname){
-            let response=error_function({
-                statuscode:401,
-                message :"Firstname cannot contain a space"
-            });
-            res.status(400).send(response);
-        }
-        let lastname_regexp=/^[A-Z]([a-zA-Z]{2,30})?$/;
 
-        let validLastName = lastname_regexp.text(lastname);
-        console.log("validity of firstname:",validLastName);
+        let firstname_regexp=/^[A-Z]([a-zA-Z]{2,30})?$/;
+
+        let validlastName = firstname_regexp.test(lastname);
+        console.log("validity of firstname:",validlastName);
 
         if(lastname.length <2){
             let response = error_function({
-                statuscode :401,
-                meassage:"Firstname is too short"
+                statuscode :400,
+                message:"Firstname is too short"
             });
             res.status(400).send(response);
             return;
@@ -109,21 +103,14 @@ exports.createUser = async function (req, res){
         if (lastname.length>30){
             let response = error_function({
                 statuscode :401,
-                meassage:"Lastname is too long"
+                message:"Lastname is too long"
             });
-            res.status(400).send(response);
-            return;
-        }
-        if(lastname){
-            let response = error_function({
-                statuscode :401,
-                message :"Firstname cannot contain space"
-            });
-            res.status(400).send(response);
+            res.status(401).send(response);
             return;
         }
 
-        let lastname_Regexp = /^[A-Z]([a-zA-Z]{2,30})?$/;
+
+        let lastname_regexp = /^[A-Z]([a-zA-Z]{2,30})?$/;
 
         let validLastName =lastname_regexp.test(lastname);
         console.log("validity off firstname :",validLastName);
@@ -133,7 +120,7 @@ exports.createUser = async function (req, res){
                 statuscode : 401,
                 message :"First name is too short"
             });
-            res.status(400).send(response);
+            res.status(401).send(response);
             return;
 
         }
@@ -142,7 +129,7 @@ exports.createUser = async function (req, res){
                 statuscode :401,
                 message:"Lastname is too long"
             });
-            res.status(400).send(response)
+            res.status(401).send(response)
             return;
 
         }
@@ -152,7 +139,7 @@ exports.createUser = async function (req, res){
                 meassage :"Lastname cannot contain a space"
             });lastname
 
-            res.status(400).send(response);
+            res.status(401).send(response);
             return;
 
         }
@@ -196,7 +183,7 @@ exports.createUser = async function (req, res){
     }
 }
 exports.getUsers = async function (req,res){
-    const UserModel = mongoose.model('users')
+    // const UserModel = mongoose.model('users')
     try{
         const userData = await UserModel.find();
         if(userData){
@@ -230,12 +217,23 @@ exports.getSingleUsers = async function (req,res){
 try{
     const userId = req.params.id;
     if (!userId){
-        res.status(400).send("User ID is required");
+
+        let response =error_function({
+        statuscode :401,
+        message :"user not found"
+    });
+    res.status(401).send(response);
         return;
     }
     const user = await users.findById(userId);
     if(!user){
         res.status(404).send("user not found");
+
+        let response =error_function({
+            statuscode :404,
+            message :"user not found"
+        });
+        res.status(404).send(response);
         return;
     }
     const userData ={
@@ -243,19 +241,21 @@ try{
         lastname :user.lastname,
         email:user.email,
     };
-    let response ={
+    let response =success_function({
         statuscode:200,
         data:userData,
         message:"User found successfully"
-    };
+    });
     res.status(200).send(response);
+    return;
 }catch(error){
-    let response ={
+    let response =error_function({
         statuscode :500,
         message:"Internal server Error",
-    };
+    });
     console.log("error :",error);
     res.status(500).send(response);
+    return;
 }
 }
 exports.updateUsers = async function (req,res){
@@ -275,7 +275,7 @@ try{
        
     }
 
-    const users = await users.findoneAndupdate({_id:req.body.id;
+    const users = await users.findoneAndupdate({_id:req.body.id,
         firstname:req.body.firstname,
         lastname:req.body.lastname,
         email:req.body.email,
@@ -286,10 +286,17 @@ try{
 
     if(!user){
         res.status(404).send("User not found");
+
+
+        let response =error_function({
+            statuscode :404,
+            message :"user not found"
+        });
+        res.status(404).send(response);
         return;
     }
     for(let key in updatedData){
-        user[key]=updatedData[key]
+        users[key]=updatedData[key]
     }
     const updatedUser =await user.save();
 }
