@@ -58,13 +58,116 @@ exports.createUser = async function (req, res){
             return;
         }
         let firstname_regexp = /^[A-Z]([a-zA-Z]{2,30})?$/;
-        let validFirstname
+        let validFirstName =firstname_regexp.test(firstname);
         
+        if (!validFirstName){
+            let response = error_function({
+                statuscode :401,
+                message : "first name is invalid"
+            });
+            res.status(400).send(response);
+            return;
+        }
+
+        if (firstname.length < 2){
+            let response = error_function({
+                statuscode :401,
+                message:"first name is too short"
+            });
+            res.status(400).send (response);
+            return;
+        }
+        
+        if (firstname.length >30){
+            let response  = error_function({
+                statuscode :401,
+                message:"first name is too long"
+            });
+            res.status(400).send(response);
+            return;
+        }
+        if(firstname){
+            let response=error_function({
+                statuscode:401,
+                message :"Firstname cannot contain a space"
+            });
+            res.status(400).send(response);
+        }
+        let lastname_regexp=/^[A-Z]([a-zA-Z]{2,30})?$/;
+
+        let validLastName = lastname_regexp.text(lastname);
+        console.log("validity of firstname:",validLastName);
+
+        if(lastname.length <2){
+            let response = error_function({
+                statuscode :401,
+                meassage:"Firstname is too short"
+            });
+            res.status(400).send(response);
+            return;
+        }
+        if (lastname.length>30){
+            let response = error_function({
+                statuscode :401,
+                meassage:"Lastname is too long"
+            });
+            res.status(400).send(response);
+            return;
+        }
+        if(lastname){
+            let response = error_function({
+                statuscode :401,
+                message :"Firstname cannot contain space"
+            });
+            res.status(400).send(response);
+            return;
+        }
+
+        let lastname_Regexp = /^[A-Z]([a-zA-Z]{2,30})?$/;
+
+        let validLastName =lastname_regexp.test(lastname);
+        console.log("validity off firstname :",validLastName);
+         
+        if(lastname.length < 2){
+            let response = error_function({
+                statuscode : 401,
+                message :"First name is too short"
+            });
+            res.status(400).send(response);
+            return;
+
+        }
+        if(lastname.length >30){
+            let response = error_function({
+                statuscode :401,
+                message:"Lastname is too long"
+            });
+            res.status(400).send(response)
+            return;
+
+        }
+        if(lastname){
+            let response = error_function({
+                statuscode :401,
+                meassage :"Lastname cannot contain a space"
+            });lastname
+
+            res.status(400).send(response);
+            return;
+
+        }
+
+        let salt = await bcrypt.genSalt(10);
+        console.log("salt :",salt);
+
+        let hashed_password = bcrypt.hashsync(password,salt);
+        console.log("hashed_password :",hashed_password);
+
         const new_user = new users({
             firstname :firstname,
             lastname :lastname,
             email,
-            password,
+            password :hashed_password,
         });
         const saved_user =await new_user.save();
         if(saved_user){
@@ -158,14 +261,28 @@ try{
 exports.updateUsers = async function (req,res){
 try{
     const userId = req.body.userId;
-    const updatedData = req.body.updatedData;
-
+    // const updatedData = req.body.updatedData;
+           
+    console.log("req.body :",req.body)
+    //validation
     if(!userId){
-        res.status(400).send("User ID is required")
-        return;
+       let response = error_function({
+            statuscode:401,
+            meassage :"User id is required"
+       });
+       res.status(400).send(response);
+       return;
+       
     }
 
-    const users = await users.findById(userId);
+    const users = await users.findoneAndupdate({_id:req.body.id;
+        firstname:req.body.firstname,
+        lastname:req.body.lastname,
+        email:req.body.email,
+
+    },{
+        upsert:ture//Make this update into an upsert
+    })
 
     if(!user){
         res.status(404).send("User not found");
@@ -202,7 +319,7 @@ exports.deleteUsers = async function (req,res){
 
         let response={
             statuscode:200,
-            message:"User deleted successfully",
+            message:"User deleted successfully",o
         };
         res.status(200).send(response);
      }catch(error){
