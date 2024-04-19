@@ -1,6 +1,7 @@
 const users =require('../db/models/users');
 const success_function = require('../utils/response_handler').success_function;
 const error_function = require('../utils/response_handler').error_function;
+const bcrypt = require('bcryptjs');
 
 exports.createUser = async function (req, res){
     try {
@@ -69,30 +70,30 @@ exports.createUser = async function (req, res){
         //     return;
         // }
 
-        if (firstname.length < 2){
-            let response = error_function({
-                statuscode :401,
-                message:"first name is too short"
-            });
-            res.status(401).send (response);
-            return;
-        }
+        // if (firstname.length < 2){
+        //     let response = error_function({
+        //         statuscode :401,
+        //         message:"first name is too short"
+        //     });
+        //     res.status(401).send (response);
+        //     return;
+        // }
         
-        if (firstname.length >30){
-            let response  = error_function({
-                statuscode :400,
-                message:"first name is too long"
-            });
-            res.status(400).send(response);
-            return;
-        }
+        // if (firstname.length >30){
+        //     let response  = error_function({
+        //         statuscode :400,
+        //         message:"first name is too long"
+        //     });
+        //     res.status(400).send(response);
+        //     return;
+        // }
 
         let firstname_regexp=/^[A-Z]([a-zA-Z]{2,30})?$/;
 
-        let validlastName = firstname_regexp.test(lastname);
+        let validlastName = firstname_regexp.test(firstname);
         console.log("validity of firstname:",validlastName);
 
-        if(lastname.length <2){
+        if(firstname.length <2){
             let response = error_function({
                 statuscode :400,
                 message:"Firstname is too short"
@@ -100,10 +101,10 @@ exports.createUser = async function (req, res){
             res.status(400).send(response);
             return;
         }
-        if (lastname.length>30){
+        if (firstname.length>30){
             let response = error_function({
                 statuscode :401,
-                message:"Lastname is too long"
+                message:"firstname is too long"
             });
             res.status(401).send(response);
             return;
@@ -113,7 +114,7 @@ exports.createUser = async function (req, res){
         let lastname_regexp = /^[A-Z]([a-zA-Z]{2,30})?$/;
 
         let validLastName =lastname_regexp.test(lastname);
-        console.log("validity off firstname :",validLastName);
+        console.log("validity of firstname :",validLastName);
          
         if(lastname.length < 2){
             let response = error_function({
@@ -133,21 +134,12 @@ exports.createUser = async function (req, res){
             return;
 
         }
-        if(lastname){
-            let response = error_function({
-                statuscode :401,
-                meassage :"Lastname cannot contain a space"
-            });lastname
 
-            res.status(401).send(response);
-            return;
-
-        }
 
         let salt = await bcrypt.genSalt(10);
         console.log("salt :",salt);
 
-        let hashed_password = bcrypt.hashsync(password,salt);
+        let hashed_password = bcrypt.hashSync(password,salt);
         console.log("hashed_password :",hashed_password);
 
         const new_user = new users({
