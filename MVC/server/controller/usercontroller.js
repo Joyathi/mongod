@@ -2,6 +2,7 @@ const users =require('../db/models/users');
 const success_function = require('../utils/response_handler').success_function;
 const error_function = require('../utils/response_handler').error_function;
 const bcrypt = require('bcryptjs');
+const{get,default:mongoose}= require('mongoose')
 
 exports.createUser = async function (req, res){
     try {
@@ -175,7 +176,7 @@ exports.createUser = async function (req, res){
     }
 }
 exports.getUsers = async function (req,res){
-    // const UserModel = mongoose.model('users')
+    const UserModel = mongoose.model('users')
     try{
         const userData = await UserModel.find();
         if(userData){
@@ -267,30 +268,25 @@ try{
        
     }
 
-    const users = await users.findoneAndupdate({_id:req.body.id,
+    const users = await users.findoneAndupdate({_id:req.body.id},{
         firstname:req.body.firstname,
         lastname:req.body.lastname,
         email:req.body.email,
 
     },{
-        upsert:ture//Make this update into an upsert
+        upsert:true//Make this update into an upsert
     })
 
-    if(!user){
+    console.log("users:",users)
+
+    if(!users){
         res.status(404).send("User not found");
-
-
-        let response =error_function({
-            statuscode :404,
-            message :"user not found"
-        });
-        res.status(404).send(response);
+           return;
+    }
+    else{
+        res.status(200).send("user updated succesfully")
         return;
     }
-    for(let key in updatedData){
-        users[key]=updatedData[key]
-    }
-    const updatedUser =await user.save();
 }
 catch(error){
     let response ={
