@@ -89,6 +89,8 @@ exports.createUser = async function (req, res){
         //     return;
         // }
 
+
+        //validating firstname
         let firstname_regexp=/^[A-Z]([a-zA-Z]{2,30})?$/;
 
         let validlastName = firstname_regexp.test(firstname);
@@ -111,7 +113,7 @@ exports.createUser = async function (req, res){
             return;
         }
 
-
+        //validating lastname
         let lastname_regexp = /^[A-Z]([a-zA-Z]{2,30})?$/;
 
         let validLastName =lastname_regexp.test(lastname);
@@ -144,8 +146,8 @@ exports.createUser = async function (req, res){
         console.log("hashed_password :",hashed_password);
 
         const new_user = new users({
-            firstname :firstname,
-            lastname :lastname,
+            firstName :firstname,
+            lastName :lastname,
             email,
             password :hashed_password,
         });
@@ -250,6 +252,8 @@ try{
     res.status(500).send(response);
     return;
 }
+
+//Update user
 }
 exports.updateUsers = async function (req,res){
 try{
@@ -257,29 +261,29 @@ try{
     // const updatedData = req.body.updatedData;
            
     console.log("req.body :",req.body)
+    console.log("reached here")
     //validation
-    if(!userId){
-       let response = error_function({
-            statuscode:401,
-            meassage :"User id is required"
-       });
-       res.status(400).send(response);
-       return;
+    // if(!userId){
+    //    let response = error_function({
+    //         statuscode:401,
+    //         meassage :"User id is required"
+    //    });
+    //    res.status(401).send(response);
+    //    return;
        
-    }
-
-    const users = await users.findoneAndupdate({_id:req.body.id},{
-        firstname:req.body.firstname,
-        lastname:req.body.lastname,
+    // }
+    const user = await users.findOneAndUpdate({_id:req.body.id},{
+        firstName:req.body.firstname,
+        lastName:req.body.lastname,
         email:req.body.email,
 
     },{
         upsert:true//Make this update into an upsert
     })
 
-    console.log("users:",users)
+    console.log("user:",user)
 
-    if(!users){
+    if(!user){
         res.status(404).send("User not found");
            return;
     }
@@ -289,34 +293,46 @@ try{
     }
 }
 catch(error){
-    let response ={
+    let response =error_function({
         statuscode :500,
         message:"internal server Error",
-    };
+    });
     console.log("error :",error);
     res.status(500).send(response)
 }
 
 }
-exports.deleteUsers = async function (req,res){
+exports.deleteUsers = async function(req,res){
     try{
         const userId = req.params.id;
+        console.log ("userId :");
         if (!userId){
-            res.status(400).send("User ID is required");
+            let response= error_function({
+                statuscode:400,
+                message :"user id is required"
+            })
+            res.status(400).send(response);
             return;
         }
         const user = await users.findById(userId);
         if(!user){
-            res.status(404).send("User not found");
+            let response= error_function({
+                statuscode:404,
+                message :"user not found"
+            })
+            res.status(404).send(response);
             return;
         }
-        await users.findByIdAndDelete(userId);
+         await users.findByIdAndDelete(userId);
 
-        let response={
+        let response=success_function({
             statuscode:200,
-            message:"User deleted successfully",o
-        };
+            message:"User deleted successfully",
+        })
+        
         res.status(200).send(response);
+
+
      }catch(error){
         let response ={
             statuscode :500,

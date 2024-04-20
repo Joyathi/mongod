@@ -1,14 +1,15 @@
-async function submitFrom(){
-    let firstname = document.getElementById('firstname').Value;
+console.log("Start")
+async function submitForm(){
+    let firstname = document.getElementById('firstname').value;
     console.log("first name :",firstname);
 
-    let lastname = document.getElementById('lastname').Value;
+    let lastname = document.getElementById('lastname').value;
     console.log("last name :",lastname);
 
-    let email = document.getElementById('email').Value;
+    let email = document.getElementById('email').value;
     console.log("email :",email);
 
-    let password = document.getElementById('password').Value;
+    let password = document.getElementById('password').value;
     console.log("password :",password);
 
     let data ={
@@ -49,7 +50,7 @@ async function getData(){
     let token = localStorage.getItem('token');
     console.log("token :",token);
 
-    let data =await fetch('http://localhost:3001/getData',{
+    let data =await fetch('http://localhost:3001/users',{
         "metord" : "GET",
         "headers":{
             "authorization" :`Bearer ${token}`
@@ -63,7 +64,7 @@ async function getData(){
 
     let pd= parsedData.data;
 
-    let Content =document.getElementById("content");
+    let content =document.getElementById("content");
     console.log("content :", content);
 
     let rows = "";
@@ -79,13 +80,14 @@ async function getData(){
         <td><input type="text"name="password" id="password-${pd[i]._id}" value="${pd[i].password}" disabled="true"></td>
         <td><button onclick="handleEdit('${pd[i]._id}')">Edit</button></td>
         <td><button onclick="handleSave('${pd[i]._id}')">Save</button></td>
+        <td><button onclick="handledelete('${pd[i]._id}')">delete</button></td>
         </tr>
         `
     }
 content.innerHTML =rows;
 }
 
-getData();
+
 
 function handleEdit(id){
     console.log("id :",id);
@@ -137,7 +139,7 @@ async function handleSave (id){
         firstname,
         lastname,
         email,
-        password,
+        password
     }
     let jsonData=JSON.stringify(data);
     console.log("jsonData :",jsonData);
@@ -160,6 +162,27 @@ async function handleSave (id){
 }
 
 function validatefirstname(){
+    let firstname = document.getElementById('firstname').value;
+    console.log("lastname :",lastname);
+
+    let firstname_error = document.getElementById("firstname-error");
+
+    let firstname_regex =/^[a-zA-Z]{2,3}([a-zA-Z]{2,30})?$/;
+
+    let isfirstNameValid = firststname_regex.text.test(lastname);
+    console.log("isfirststNameValid :",isfirstNameValid);
+
+    if(isfirstNameValid){
+        firstname_error.innerHTML = "Invalid Name";
+        return;
+    }else{
+        firstname_error.innerHTML ="";
+        return;
+    }
+}
+
+
+function validatelastname(){
     let lastname = document.getElementById('lastname').value;
     console.log("lastname :",lastname);
 
@@ -167,10 +190,10 @@ function validatefirstname(){
 
     let lastname_regex =/^[a-zA-Z]{2,3}([a-zA-Z]{2,30})?$/;
 
-    let islastNameVaild = lastname_regex.text.test(lastname);
+    let islastNameValid = lastname_regex.text.test(lastname);
     console.log("islastNameValid :",islastNameValid);
 
-    if(islastNameVaild){
+    if(islastNameValid){
         lastname_error.innerHTML = "Invalid Name";
         return;
     }else{
