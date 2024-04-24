@@ -161,7 +161,7 @@ async function handleSave (id){
     }
 }
 
-function validatefirstname(){
+function validatefirstName(){
     let firstname = document.getElementById('firstname').value;
     console.log("lastname :",lastname);
 
@@ -169,8 +169,8 @@ function validatefirstname(){
 
     let firstname_regex =/^[a-zA-Z]{2,3}([a-zA-Z]{2,30})?$/;
 
-    let isfirstNameValid = firststname_regex.text.test(lastname);
-    console.log("isfirststNameValid :",isfirstNameValid);
+    let isfirstNameValid = firstname_regex.test(firstname);
+    console.log("isfirstNameValid :",isfirstNameValid);
 
     if(isfirstNameValid){
         firstname_error.innerHTML = "Invalid Name";
@@ -182,7 +182,7 @@ function validatefirstname(){
 }
 
 
-function validatelastname(){
+function validatelastName(){
     let lastname = document.getElementById('lastname').value;
     console.log("lastname :",lastname);
 
@@ -190,19 +190,19 @@ function validatelastname(){
 
     let lastname_regex =/^[a-zA-Z]{2,3}([a-zA-Z]{2,30})?$/;
 
-    let islastNameValid = lastname_regex.text.test(lastname);
+    let islastNameValid = lastname_regex.test(lastname);
     console.log("islastNameValid :",islastNameValid);
 
     if(islastNameValid){
         lastname_error.innerHTML = "Invalid Name";
         return;
     }else{
-        Lastname_error.innerHTML ="";
+        lastname_error.innerHTML ="";
         return;
     }
 }
 
-function validateEmail(){
+function validateemail(){
     let email = document.getElementById('email').value;
     console.log("email :",email)
 

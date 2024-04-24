@@ -6,8 +6,10 @@ const{get,default:mongoose}= require('mongoose')
 
 exports.createUser = async function (req, res){
     try {
-        const firstname = req.body.firstname;
-        const lastname = req.body.lastname;
+        const firstname = req.body.firstName;
+
+        const lastname = req.body.lastName;
+
 
         const email = req.body.email
         const password = req.body.password
@@ -59,42 +61,14 @@ exports.createUser = async function (req, res){
             res.status(400).send(response);
             return;
         }
-        // let firstname_regexp = /^[A-Z]([a-zA-Z]{2,30})?$/;
-        // let validFirstName =firstname_regexp.test(firstname);
-        
-        // if (!validFirstName){
-        //     let response = error_function({
-        //         statuscode :401,
-        //         message : "first name is invalid"
-        //     });
-        //     res.status(401).send(response);
-        //     return;
-        // }
 
-        // if (firstname.length < 2){
-        //     let response = error_function({
-        //         statuscode :401,
-        //         message:"first name is too short"
-        //     });
-        //     res.status(401).send (response);
-        //     return;
-        // }
-        
-        // if (firstname.length >30){
-        //     let response  = error_function({
-        //         statuscode :400,
-        //         message:"first name is too long"
-        //     });
-        //     res.status(400).send(response);
-        //     return;
-        // }
 
 
         //validating firstname
         let firstname_regexp=/^[A-Z]([a-zA-Z]{2,30})?$/;
 
-        let validlastName = firstname_regexp.test(firstname);
-        console.log("validity of firstname:",validlastName);
+        let validfirstName = firstname_regexp.test(firstname);
+        console.log("validity of firstname:",validfirstName);
 
         if(firstname.length <2){
             let response = error_function({
@@ -117,7 +91,7 @@ exports.createUser = async function (req, res){
         let lastname_regexp = /^[A-Z]([a-zA-Z]{2,30})?$/;
 
         let validLastName =lastname_regexp.test(lastname);
-        console.log("validity of firstname :",validLastName);
+        console.log("validity of lastname :",validLastName);
          
         if(lastname.length < 2){
             let response = error_function({
@@ -146,8 +120,8 @@ exports.createUser = async function (req, res){
         console.log("hashed_password :",hashed_password);
 
         const new_user = new users({
-            firstName :firstname,
-            lastName :lastname,
+            firstname ,
+            lastname ,
             email,
             password :hashed_password,
         });
@@ -273,8 +247,8 @@ try{
        
     // }
     const user = await users.findOneAndUpdate({_id:req.body.id},{
-        firstName:req.body.firstname,
-        lastName:req.body.lastname,
+        firstName:req.body.firstName,
+        lastName:req.body.lastName,
         email:req.body.email,
 
     },{
