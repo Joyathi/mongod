@@ -161,6 +161,20 @@ async function handleSave (id){
     }
 }
 
+async function handledelete(userId){
+    console.log("userId :",userId);
+    let response = await fetch(`/users/${userId}`,{
+        method : "DELETE",
+        headers:{
+            "Content-type" : "application/json",
+        },
+    });
+    let data = await response.json();
+    alert(data.message);
+    console.error('Error:',error.message);
+    alert('An error occurred while deleting user');
+}
+
 function validatefirstName(){
     let firstname = document.getElementById('firstname').value;
     console.log("lastname :",lastname);

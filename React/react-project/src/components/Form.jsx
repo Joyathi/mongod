@@ -6,11 +6,11 @@ function Form({onsubmit}){
     const [inputData,setInputData]= useState('');
     //console.log("inputData :",inputData);
 
-    const handleSubmit =(e) =>{
+    const handleSubmit = (e) =>{
         e.preventDefault();
         onsubmit(inputData);
     }
-    const handleInputChange =(e) =>{
+    const handleInputChange = (e) =>{
         setInputData(e.target.value);
     }
 
