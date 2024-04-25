@@ -1,26 +1,76 @@
 import { useState } from "react";
 
-function Form({onsubmit}){
+function Form({onsubmit}) {
     console.log("Form component rendering...");
 
-    const [inputData,setInputData]= useState('');
-    //console.log("inputData :",inputData);
+    const [inputData,setInputData]= useState({
+        firstName : '',
+        lastName : '',
+        email : '',
+        password: '',
+    });
+    // console.log("inputData :",inputData);
 
     const handleSubmit = (e) =>{
         e.preventDefault();
         onsubmit(inputData);
+      
     }
-    const handleInputChange = (e) =>{
-        setInputData(e.target.value);
-    }
+    console.log ("inputData:",inputData);
+   
 
+    const handleInputChange = (e) =>{
+        // e.preventDefault();
+        // setInputData(e.target.value);
+        
+        if(e.target.name === "first-name"){
+            setInputData({
+                firstName : e.target.value,
+                lastName : inputData.lastName,
+                email : inputData.email,
+                password :inputData.password,
+            })
+        }
+
+        if(e.target.name === "last-name"){
+            setInputData({
+                firstName :inputData.firstName,
+                lastName :  e.target.value,
+                email : inputData.email,
+                password :inputData.password,
+            })
+        }
+
+        if(e.target.name === "email"){
+            setInputData({
+                firstName :inputData.firstName,
+                lastName : inputData.lastName,
+                email :  e.target.value,
+                password :inputData.password,
+            })
+    }
+    if(e.target.name === "password"){
+        setInputData({
+            firstName :inputData.firstName,
+            lastName : inputData.lastName,
+            email :inputData.email,
+            password :e.target.value,
+        })
+
+      }
+
+   }
     return(
         <>
         <form onSubmit={handleSubmit}>
-            <input type="text" name="first-name" id="first-name" onChange={handleInputChange}  value ={inputData}/>
+            <input type="text" name="first-name" id="first-name" onChange={handleInputChange}  value ={inputData.firstName} placeholder="Enter your first name"/>
+            <input type="text" name="last-name" id="last-name" onChange={handleInputChange} value={inputData.lastName} placeholder="Enter your last name"/>
+            <input type="text" name="email" id="email" onChange={handleInputChange} value={inputData.email} placeholder="Enter your email" />
+            <input type="text" name="password" id="password" onChange={handleInputChange} value={inputData.password} placeholder="Enter your password" />
            <button type="submit">Submit</button>       
         </form>
         </>
+
     )
 }
 export default Form;
