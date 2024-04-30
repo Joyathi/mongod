@@ -16,7 +16,7 @@ function Form({onsubmit}) {
         onsubmit(inputData);
       
     }
-    console.log ("inputData:",inputData);
+    // console.log ("inputData:",inputData);
    
 
     const handleInputChange = (e) =>{
