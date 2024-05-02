@@ -26,10 +26,18 @@ export default function Login1(){
 
         {content}
 
-        <button onClick={ () =>useState}>
+        {/* <button onClick={ () =>useState}>
             {`${useState ? 'Login' : 'Logout'}`}
+
+        </button> */}
+
+<button onClick={ toggleLoginLogoff}>
+            { isLoggedIn ? 'Logoff' : 'Login'}
 
         </button>
         </>
+        
+
+        
     )
 }
