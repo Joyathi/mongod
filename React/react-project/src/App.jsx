@@ -8,7 +8,8 @@ import { Fragment } from 'react'
 // import Login1 from './components/Conditional_rendering/Login1';
 // import MyComponentWithUpperCase from './components/HigherOrderComponents/HigherOrderComponents';
 // import MyPureComponent from './components/PureComponents/MyPurecomponents';
-import MyPureComponent1 from './components/PureComponents/MyPureComponent1';
+// import MyPureComponent1 from './components/PureComponents/MyPureComponent1';
+import { Router } from 'react-router-dom';
 function App() {
  
 
@@ -24,7 +25,8 @@ function App() {
     {/* <MyComponentWithUpperCase text ={"Hello world"}/> */}
 
     {/* < MyPureComponent message ={"hai"}/> */}  
-    <MyPureComponent1 message = {"hello"}/>
+    {/* <MyPureComponent1 message = {"hello"}/> */}
+    <Router/>
 
     </>
   )
