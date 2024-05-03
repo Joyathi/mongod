@@ -9,7 +9,9 @@ import { Fragment } from 'react'
 // import MyComponentWithUpperCase from './components/HigherOrderComponents/HigherOrderComponents';
 // import MyPureComponent from './components/PureComponents/MyPurecomponents';
 // import MyPureComponent1 from './components/PureComponents/MyPureComponent1';
-import { Router } from 'react-router-dom';
+// import { Router } from 'react-router-dom';
+import Routing from './components/Routing/Routing';
+
 function App() {
  
 
@@ -26,7 +28,7 @@ function App() {
 
     {/* < MyPureComponent message ={"hai"}/> */}  
     {/* <MyPureComponent1 message = {"hello"}/> */}
-    <Router/>
+    <Routing/>
 
     </>
   )

@@ -4,45 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
-<link rel="stylesheet" href="style.css">
 </head>
+<link rel="stylesheet" href="style.css">
+
 <body>
-    <form >
+    <form action="/submit" method="POST">
         <h2>REGISTRATION FORM</h2>
 
-         <!-- text input -->
-         <div id="firstname-group">
-            <label for="name">First Name</label>
+        <!--Input -->
+        <div id="firstname-group">
+            <label for="name">First Name:</label>
             <input type="text" id="firstname" name="firstname" onkeyup="validatefirstName()">
             <div id="firstname-error"></div>
-         </div>
+        </div>
 
-         <div id="lastname-group">
-            <label for="name">Last Name</label>
-            <input type="text" id="lastname" name="lastname" onkeyup="validatelastName()">
+        <div id="lastname-group">
+            <label for=" name">Last Name:</label>
+            <input type="text" id="lastname" name="lastnane" onkeyup="validatelastName()">
             <div id="lastname-error"></div>
-         </div>
+        </div>
 
-         <!-- email input -->
-         <div id="email-group">
-            <label for="Email">Email</label>
-            <input type="text" id="email" name="email" onkeyup="validateemail()">
+        <!--Email Input-->
+        <div id="email-group">
+            <label for "email">Email:</label>
+            <input type="email" id="email" name="email" onkeyup="validateEmail()">
             <div id="email-error"></div>
-         </div>
+        </div>
 
-         <!-- password input -->
-         <div id="password">
-            <label for="password">password</label>
-            <input type="text" id="password" name="password" onkeyup="validatepassword()">
+        <!-- Password Input-->
+        <div id="password-group">
+            <label for="password">Password: </label>
+            <input type="password" id="password" name="password" onkeyup="validatePassword()">
             <div id="password-error"></div>
-         </div>
+        </div>
 
-         <!-- submit button -->
+        <!-- Submit Button -->
+        <button type="button" onclick="submitForm()"> Submit </button>
 
-         <button type="button" id="submit" onclick="submitForm()">submit</button>
+    </form>
 
-    </form> 
-    <script src="script.js"></script>
 </body>
+
 </html>
