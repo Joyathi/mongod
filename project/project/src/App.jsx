@@ -1,13 +1,13 @@
-import { Fragment } from 'react'
+import { Component, Fragment } from 'react'
 
-import Routing from './components/Routing/Routing';
+import Navigation from "./Components/Landingpage/Navigation";
 
 function App() {
  
 
   return (
     <>
-    
+    <Navigation/>
     </>
   )
 }

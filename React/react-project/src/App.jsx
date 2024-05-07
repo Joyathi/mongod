@@ -10,7 +10,8 @@ import { Fragment } from 'react'
 // import MyPureComponent from './components/PureComponents/MyPurecomponents';
 // import MyPureComponent1 from './components/PureComponents/MyPureComponent1';
 // import { Router } from 'react-router-dom';
-import Routing from './components/Routing/Routing';
+// import Routing from './components/Routing/Routing';
+import UseCallbackComponent from './components/Hooks/UseCallback/UseCallBackComponents';
 
 function App() {
  
@@ -28,7 +29,8 @@ function App() {
 
     {/* < MyPureComponent message ={"hai"}/> */}  
     {/* <MyPureComponent1 message = {"hello"}/> */}
-    <Routing/>
+    {/* <Routing/> */}
+    <UseCallbackComponent/>
 
     </>
   )
