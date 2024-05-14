@@ -1,0 +1,43 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: azure;
+}
+form{
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: rgb(253, 254, 255);
+}
+
+label{
+    color: rgb(116, 202, 116);
+}
+h2{
+    font-style: italic;
+    color: grey;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+select{
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    border: 1px solid white;
+}
+button{
+    background-color: rgb(174, 185, 156);
+    color: white;
+    padding: 10px 20px;
+}
