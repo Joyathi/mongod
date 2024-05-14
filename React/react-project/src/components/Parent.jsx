@@ -1,23 +1,21 @@
 import { useState } from "react";
-// import users from "../../../../MVC/server/db/models/users";
 import Form from "./Form";
 import Display from "./Display";
 
+function Parent() {
+    console.log("Parent Component rendering...");
 
-function Parent (){
-    console.log("parent component rendering...");
+    const [data, setData] = useState('');
 
-    const [data, setData] =useState('');
-
-    const handleSubmit =(data)=>{
+    const handleSubmit = (data) => {
         setData(data);
     }
+
     return(
         <>
-    <Form onSubmit ={handleSubmit}/>
-    <Display DisplayData ={data} /> 
-</>
-)
-
+        <Form onsubmit={handleSubmit}/>
+        <Display displayData={data}/>
+        </>
+    )
 }
 export default Parent;
