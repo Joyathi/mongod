@@ -18,7 +18,7 @@ import { Fragment } from "react";
 // import MyPureComponent1 from "./components/PureComponents/MyPureComponent1";
 
 //03-May
-// import Routing from "./components/Routing/Routing";
+import Routing from "./components/Routing/Routing";
 
 //07_May
 // import UseCallbackComoponent from "./components/Hooks/UseCallBack/UseCallBack";
@@ -48,12 +48,12 @@ function App() {
     {/* <MyComponentWithUpperCase text={"Hello, Welcome"}/> */}
     {/* <MyPureComponent message= {"hai"}/> */}
     {/* <MyPureComponent1 message={"Helloo"}/> */}
-    {/* <Routing /> */}
+    <Routing />
     {/* <UseCallbackComoponent/> */}
     {/* <UseContextComponent/> */}
     {/* <UseContextComponent1/> */}
     {/* <UseEffectComponent/> */}
-    <UseEffectComponent1/>
+    {/* <UseEffectComponent1/> */}
     </>
   )
 }

@@ -13,10 +13,10 @@ function Navigation() {
                             <button><Link to = {'/about'}>About</Link></button>
                         </li>
                         <li>
-                            <button><Link to = {'/login'}>Sign In</Link></button>
+                            <button><Link to = {'/login'}>LogIn</Link></button>
                         </li>
                         <li>
-                            <button><Link to={'/signin'}>LogIn</Link></button>
+                            <button><Link to={'/signin'}>Add USer</Link></button>
                         </li>
                         <li>
                             <button><Link to = {'/support'}>Support</Link></button>

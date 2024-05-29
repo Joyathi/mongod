@@ -151,169 +151,170 @@ exports.createUser = async function (req, res){
         res.status(400).send(response);
     }
 }
-exports.getUsers = async function (req,res){
-    const UserModel = mongoose.model('users')
-    try{
-        const userData = await UserModel.find();
-        if(userData){
-            let response = success_function({
-                statuscode :200,
-                data :userData,
-                meassage:"Datas fetched successfully",
-            })
-            res.status(200).send(response);
-            return;
-        }else{
-            let response = error_function({
-                statuscode :400,
-                message : "Failed to get Data"
-            })
-            res.status(400).send(response);
-            return;
-        }
-    }catch (error){
-        let response = error_function({
-            statuscode:400,
-            message:"something went wrong",
-        })
-        console.log("error:",error);
-        res.status(400).send(response);
-        return;
-    }
+// }
+// exports.getUsers = async function (req,res){
+//     const UserModel = mongoose.model('users')
+//     try{
+//         const userData = await UserModel.find();
+//         if(userData){
+//             let response = success_function({
+//                 statuscode :200,
+//                 data :userData,
+//                 meassage:"Datas fetched successfully",
+//             })
+//             res.status(200).send(response);
+//             return;
+//         }else{
+//             let response = error_function({
+//                 statuscode :400,
+//                 message : "Failed to get Data"
+//             })
+//             res.status(400).send(response);
+//             return;
+//         }
+//     }catch (error){
+//         let response = error_function({
+//             statuscode:400,
+//             message:"something went wrong",
+//         })
+//         console.log("error:",error);
+//         res.status(400).send(response);
+//         return;
+//     }
 
-}
-exports.getSingleUsers = async function (req,res){
-try{
-    const userId = req.params.id;
-    if (!userId){
+// }
+// exports.getSingleUsers = async function (req,res){
+// try{
+//     const userId = req.params.id;
+//     if (!userId){
 
-        let response =error_function({
-        statuscode :401,
-        message :"user not found"
-    });
-    res.status(401).send(response);
-        return;
-    }
-    const user = await users.findById(userId);
-    if(!user){
-        res.status(404).send("user not found");
+//         let response =error_function({
+//         statuscode :401,
+//         message :"user not found"
+//     });
+//     res.status(401).send(response);
+//         return;
+//     }
+//     const user = await users.findById(userId);
+//     if(!user){
+//         res.status(404).send("user not found");
 
-        let response =error_function({
-            statuscode :404,
-            message :"user not found"
-        });
-        res.status(404).send(response);
-        return;
-    }
-    const userData ={
-        firstname :user.firstname,
-        lastname :user.lastname,
-        email:user.email,
-    };
-    let response =success_function({
-        statuscode:200,
-        data:userData,
-        message:"User found successfully"
-    });
-    res.status(200).send(response);
-    return;
-}catch(error){
-    let response =error_function({
-        statuscode :500,
-        message:"Internal server Error",
-    });
-    console.log("error :",error);
-    res.status(500).send(response);
-    return;
-}
+//         let response =error_function({
+//             statuscode :404,
+//             message :"user not found"
+//         });
+//         res.status(404).send(response);
+//         return;
+//     }
+//     const userData ={
+//         firstname :user.firstname,
+//         lastname :user.lastname,
+//         email:user.email,
+//     };
+//     let response =success_function({
+//         statuscode:200,
+//         data:userData,
+//         message:"User found successfully"
+//     });
+//     res.status(200).send(response);
+//     return;
+// }catch(error){
+//     let response =error_function({
+//         statuscode :500,
+//         message:"Internal server Error",
+//     });
+//     console.log("error :",error);
+//     res.status(500).send(response);
+//     return;
+// }
 
-//Update user
-}
-exports.updateUsers = async function (req,res){
-try{
-    const userId = req.body.userId;
-    // const updatedData = req.body.updatedData;
+// //Update user
+// }
+// exports.updateUsers = async function (req,res){
+// try{
+//     const userId = req.body.userId;
+//     // const updatedData = req.body.updatedData;
            
-    console.log("req.body :",req.body)
-    console.log("reached here")
-    //validation
-    // if(!userId){
-    //    let response = error_function({
-    //         statuscode:401,
-    //         meassage :"User id is required"
-    //    });
-    //    res.status(401).send(response);
-    //    return;
+//     console.log("req.body :",req.body)
+//     console.log("reached here")
+//     //validation
+//     // if(!userId){
+//     //    let response = error_function({
+//     //         statuscode:401,
+//     //         meassage :"User id is required"
+//     //    });
+//     //    res.status(401).send(response);
+//     //    return;
        
-    // }
-    const user = await users.findOneAndUpdate({_id:req.body.id},{
-        firstName:req.body.firstName,
-        lastName:req.body.lastName,
-        email:req.body.email,
+//     // }
+//     const user = await users.findOneAndUpdate({_id:req.body.id},{
+//         firstName:req.body.firstName,
+//         lastName:req.body.lastName,
+//         email:req.body.email,
 
-    },{
-        upsert:true//Make this update into an upsert
-    })
+//     },{
+//         upsert:true//Make this update into an upsert
+//     })
 
-    console.log("user:",user)
+//     console.log("user:",user)
 
-    if(!user){
-        res.status(404).send("User not found");
-           return;
-    }
-    else{
-        res.status(200).send("user updated succesfully")
-        return;
-    }
-}
-catch(error){
-    let response =error_function({
-        statuscode :500,
-        message:"internal server Error",
-    });
-    console.log("error :",error);
-    res.status(500).send(response)
-}
+//     if(!user){
+//         res.status(404).send("User not found");
+//            return;
+//     }
+//     else{
+//         res.status(200).send("user updated succesfully")
+//         return;
+//     }
+// }
+// catch(error){
+//     let response =error_function({
+//         statuscode :500,
+//         message:"internal server Error",
+//     });
+//     console.log("error :",error);
+//     res.status(500).send(response)
+// }
 
-}
-exports.deleteUsers = async function(req,res){
-    try{
-        const userId = req.params.id;
-        console.log ("userId :");
-        if (!userId){
-            let response= error_function({
-                statuscode:400,
-                message :"user id is required"
-            })
-            res.status(400).send(response);
-            return;
-        }
-        const user = await users.findById(userId);
-        if(!user){
-            let response= error_function({
-                statuscode:404,
-                message :"user not found"
-            })
-            res.status(404).send(response);
-            return;
-        }
-         await users.findByIdAndDelete(userId);
+// }
+// exports.deleteUsers = async function(req,res){
+//     try{
+//         const userId = req.params.id;
+//         console.log ("userId :");
+//         if (!userId){
+//             let response= error_function({
+//                 statuscode:400,
+//                 message :"user id is required"
+//             })
+//             res.status(400).send(response);
+//             return;
+//         }
+//         const user = await users.findById(userId);
+//         if(!user){
+//             let response= error_function({
+//                 statuscode:404,
+//                 message :"user not found"
+//             })
+//             res.status(404).send(response);
+//             return;
+//         }
+//          await users.findByIdAndDelete(userId);
 
-        let response=success_function({
-            statuscode:200,
-            message:"User deleted successfully",
-        })
+//         let response=success_function({
+//             statuscode:200,
+//             message:"User deleted successfully",
+//         })
         
-        res.status(200).send(response);
+//         res.status(200).send(response);
 
 
-     }catch(error){
-        let response ={
-            statuscode :500,
-            message:"internal server Error",
-        };
-        console.log("error :",error);
-        res.status(500).send(response)
-     }
+//      }catch(error){
+//         let response ={
+//             statuscode :500,
+//             message:"internal server Error",
+//         };
+//         console.log("error :",error);
+//         res.status(500).send(response)
+//      }
 
-}
+// }
