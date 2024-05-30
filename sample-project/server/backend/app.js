@@ -3,8 +3,6 @@ const app = express();
 const connect = require('./db/config');
 const userRoutes =require('./routes/userRoutes');
 const authRoutes =require('./routes/authRoutes');
-const dotenv = require ('dotenv');
-dotenv.config();
 
 //Database connection
 connect();
