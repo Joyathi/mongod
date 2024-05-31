@@ -150,39 +150,39 @@ exports.createUser = async function (req, res){
         console.log("error :",error);
         res.status(400).send(response);
     }
-}
-// }
-// exports.getUsers = async function (req,res){
-//     const UserModel = mongoose.model('users')
-//     try{
-//         const userData = await UserModel.find();
-//         if(userData){
-//             let response = success_function({
-//                 statuscode :200,
-//                 data :userData,
-//                 meassage:"Datas fetched successfully",
-//             })
-//             res.status(200).send(response);
-//             return;
-//         }else{
-//             let response = error_function({
-//                 statuscode :400,
-//                 message : "Failed to get Data"
-//             })
-//             res.status(400).send(response);
-//             return;
-//         }
-//     }catch (error){
-//         let response = error_function({
-//             statuscode:400,
-//             message:"something went wrong",
-//         })
-//         console.log("error:",error);
-//         res.status(400).send(response);
-//         return;
-//     }
 
-// }
+}
+exports.getUsers = async function (req,res){
+    const UserModel = mongoose.model('users')
+    try{
+        const userData = await UserModel.find();
+        if(userData){
+            let response = success_function({
+                statuscode :200,
+                data :userData,
+                meassage:"Datas fetched successfully",
+            })
+            res.status(200).send(response);
+            return;
+        }else{
+            let response = error_function({
+                statuscode :400,
+                message : "Failed to get Data"
+            })
+            res.status(400).send(response);
+            return;
+        }
+    }catch (error){
+        let response = error_function({
+            statuscode:400,
+            message:"something went wrong",
+        })
+        console.log("error:",error);
+        res.status(400).send(response);
+        return;
+    }
+
+}
 // exports.getSingleUsers = async function (req,res){
 // try{
 //     const userId = req.params.id;
