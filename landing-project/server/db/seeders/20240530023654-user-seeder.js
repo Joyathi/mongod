@@ -10,13 +10,13 @@ module.exports = {
       return models.users
           .insertMany ([
             {
-              _id: "6657ecec70745989b1757fd7",
-              firstname: "John",
-              lastname: "Varghese",
+              _id: "665fd9edc95983db42608a75",
+              firstname: "manu",
+              lastname: "jhon",
               gender: "Male",
               mobil_no: "9874563210",
-              email:"johnvarghese12345@gmail.com",
-              password : "$2y$10$CJftu6Ojp9tPHeTspEVLX.jgLlIr489Xl/RorZLPBVbnGBQtI4bcS"       //John@123
+              email:"manujhon@gmail.com",
+              password : "$2y$07$TVaixWAGYKOmnZfJfFZwpeuxW/qZ/nkVkaghK62rjfQ44EuhUte2y"       //manu123
             }
           ])
           .then((res) => {

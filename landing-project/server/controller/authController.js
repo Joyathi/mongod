@@ -41,10 +41,11 @@ exports.login = async function (req, res) {
             // response.user_type = user_type;
             res.status(response.statusCode).send(response);
             return;
-          } else {
+          } 
+          else {
             let response = error_function({
               statusCode: 401,
-              message: "Invalid Credentials",
+              message: "Invalid ",
             });
 
             res.status(response.statusCode).send(response);
@@ -54,7 +55,7 @@ exports.login = async function (req, res) {
       } else {
         let response = error_function({
           statusCode: 401,
-          message: "Invalid Credentials",
+          message: "Invalid data",
         });
         res.status(response.statusCode).send(response);
         return;
