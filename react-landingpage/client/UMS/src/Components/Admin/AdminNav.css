@@ -1,16 +1,17 @@
 .list,ul{
     display: flex;
-    padding: 0px 20px 0px 20px;
+    /* padding: 0px 20px 0px 20px; */
 }
 
 .list ul,li{
     list-style-type: none;
-    padding: 10px 40px 0px 40px;
+    /* padding: 10px 40px 0px 40px; */
 }
 
-.adminnav{
-    border: solid 1px green;
-    color:white;
-    background-color: green;
-    height: 8vh;
-} 
+/* .adminnav{
+    /* border: solid 1px rgb(246, 247, 246); */
+    /* color:white; */
+
+    /* height: 8vh; */
+    /* margin-top: 0%; */
+/* }  */ 

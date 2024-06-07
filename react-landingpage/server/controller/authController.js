@@ -30,7 +30,8 @@ exports.login = async function (req, res) {
             let access_token = jwt.sign(
               { user_id: user._id },
               process.env.PRIVATE_KEY,
-              { expiresIn: "10d" }
+              { expiresIn: "10d" },
+
             );
             let response = success_function({
               statusCode: 200,
@@ -43,7 +44,7 @@ exports.login = async function (req, res) {
             return;
           } else {
             let response = error_function({
-              statusCode: 401,
+              statusCode: 409,
               message: "Invalid Credentials",
             });
 

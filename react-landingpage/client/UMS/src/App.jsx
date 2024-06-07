@@ -14,9 +14,10 @@ function App() {
   return (
     <>
       <Router>
-      <LandingPage/>
+     
 
           <Routes>
+            <Route path ="/" exact element= {<LandingPage/>}/>
             <Route path="/login" exact element={<LogIn />} />
             <Route path="/admin" exact element={<Admin />}/>
             {/* <Route path="/about" exact element={<UserNav />} /> */}
