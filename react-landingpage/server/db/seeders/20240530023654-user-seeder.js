@@ -35,7 +35,7 @@ module.exports = {
         .deleteMany({
           _id: {
             $in: [
-              "665ffd343eabb7ec218daac8",
+              "6662773aa253762ae5fedeea",
             ],
           },
           })
