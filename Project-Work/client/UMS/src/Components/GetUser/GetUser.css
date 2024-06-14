@@ -1,0 +1,33 @@
+.getData {
+    color: green;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.one, .one p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.one p {
+    width: max-content;
+    color: green;
+}
+
+.two, .three, .headings, .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.headings, .headings h1 {
+    color: black;
+}
+
+.getData h1 {
+    margin-bottom: 20px;
+}
