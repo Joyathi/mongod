@@ -39,32 +39,31 @@ exports.getUsers = async function (req, res) {
 
 exports.createUser = async function (req, res) {
   try {
-      const firstname = req.body.firstname;
-      const lastname = req.body.lastname;
+      const name = req.body.name;
       const email = req.body.email;
       const password = req.body.password;
       console.log("password :", password);
 
       //Validations
-      if(!firstname) {
+      if(!name) {
           let response = error_function ({
               statusCode : 401,
-              message : "First Name is required"
+              message : " Name is required"
           });
 
           res.status(400).send(response);
           return;
       }
 
-      else if (!lastname){
-          let response = error_function ({
-              statusCode : 401,
-              message : "Last Name is required"
-          });
+    //   else if (!lastname){
+    //       let response = error_function ({
+    //           statusCode : 401,
+    //           message : "Last Name is required"
+    //       });
 
-          res.status(400).send(response);
-          return;
-      }
+    //       res.status(400).send(response);
+    //       return;
+    //   }
       else if (!email){
           let response = error_function ({
               statusCode : 401,
@@ -97,13 +96,13 @@ exports.createUser = async function (req, res) {
           return;
       }
 
-      //Validating firstname
+      //Validating name
 
-      let firstname_regexp = /^[A-Z]([a-zA-Z]{2,30})?$/;
-      let validFirstName = firstname_regexp.test(firstname);
-      console.log("validity of firstname: ", validFirstName);
+      let name_regexp = /^[A-Z]([a-zA-Z]{2,30})?$/;
+      let validname = name_regexp.test(name);
+      console.log("validity of name: ", validName);
 
-      if(!validFirstName) {
+      if(!Name) {
           let response = error_function ({
               statusCode : 401,
               message : "First name is invalid"
@@ -113,59 +112,59 @@ exports.createUser = async function (req, res) {
           return;
       }
 
-      if(firstname.length < 2){
+      if(name.length < 2){
           let response = error_function ({
               statusCode : 401,
-              message : "Firstname is too short"
+              message : "name is too short"
           });
 
           res.status(400).send(response);
           return;
       }
-      if(firstname.length > 30){
+      if(name.length > 30){
           let response = error_function ({
               statusCode : 401,
-              message : "Firstname is too long"
-          });
-
-          res.status(400).send(response);
-          return;
-      }
-
-
-      //Validating lastname
-      let lastname_regexp = /^[A-Z]([a-zA-Z]{2,30})?$/;
-      let validLastName = lastname_regexp.test(lastname);
-      console.log("validity of firstname: ", validLastName);
-
-      if(!validLastName) {
-          let response = error_function ({
-              statusCode : 401,
-              message : "Last name is invalid"
+              message : "name is too long"
           });
 
           res.status(400).send(response);
           return;
       }
 
-      if(lastname.length < 2){
-          let response = error_function ({
-              statusCode : 401,
-              message : "Lasstname is too short"
-          });
 
-          res.status(400).send(response);
-          return;
-      }
-      if(lastname.length > 30){
-          let response = error_function ({
-              statusCode : 401,
-              message : "Lastname is too long"
-          });
+    //   //Validating lastname
+    //   let lastname_regexp = /^[A-Z]([a-zA-Z]{2,30})?$/;
+    //   let validLastName = lastname_regexp.test(lastname);
+    //   console.log("validity of firstname: ", validLastName);
 
-          res.status(400).send(response);
-          return;
-      }
+    //   if(!validLastName) {
+    //       let response = error_function ({
+    //           statusCode : 401,
+    //           message : "Last name is invalid"
+    //       });
+
+    //       res.status(400).send(response);
+    //       return;
+    //   }
+
+    //   if(lastname.length < 2){
+    //       let response = error_function ({
+    //           statusCode : 401,
+    //           message : "Lasstname is too short"
+    //       });
+
+    //       res.status(400).send(response);
+    //       return;
+    //   }
+    //   if(lastname.length > 30){
+    //       let response = error_function ({
+    //           statusCode : 401,
+    //           message : "Lastname is too long"
+    //       });
+
+    //       res.status(400).send(response);
+    //       return;
+    //   }
 
 
       //validating email
@@ -201,8 +200,7 @@ exports.createUser = async function (req, res) {
       console.log("hashed_password : ", hashed_password);
 
       const new_user = new users({
-          firstName : firstname,
-          lastName : lastname,
+          name : name,
           email,
           password : hashed_password,
       });

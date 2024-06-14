@@ -11,10 +11,9 @@ module.exports = {
           .insertMany ([
             {
               _id: "6662773aa253762ae5fedeea",
-              firstname: "manu",
-              lastname: "john",
+             name: "manu john",
               gender: "Male",
-              mobil_no: "9874563211",
+              mobile_no: "9874563211",
               email:"manujohn@gmail.com",
               password : "$2y$10$yp00iyGUD1R.llTepMbWKeoxYRXm206xT1aSidDzs.n7ZO6ViHbsu"//manu@12
             }
