@@ -3,7 +3,7 @@
 module.exports = {
   up: (models, mongoose) => {
    
-      return models.users
+      return models.user_types
       .insertMany([
         {
           _id:"666a5bcfe9abbf4199c8ab72",
@@ -21,7 +21,7 @@ module.exports = {
       })
   },
   down:(model, mongoose)=>{
-    return models.users
+    return models.user_types
     .deleteMany({
          _id:{
           $in:[
