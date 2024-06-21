@@ -15,13 +15,13 @@ exports.sendEmail = async function (emails, subject, content) {
         secure: port == 465 ? true : false, // true for 465, false for other ports
         auth: {
           user: "b82bf8730a34c4",
-          pass: "9180c28c47a7f6",
+          pass: "f6cec5401a1936",
         },
       });
 
       // send mail with defined transport object
       let info = await transporter.sendMail({
-        from: '"Zen" <support@hrzen.in>', // sender address
+        from: '"hi" <hi@demomailtrap.com>', // sender address
         to: emails, // list of receivers
         subject: subject, // Subject line
         html: content, // html body
