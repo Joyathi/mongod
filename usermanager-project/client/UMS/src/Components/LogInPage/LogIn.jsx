@@ -131,6 +131,10 @@
                     <div className="btn">
                         <button type="submit">Log In</button>
                     </div>
+                    <div className="Aa">
+                        <button type="submit">Forgot Password</button>
+
+                    </div>
                 </form>
             );
         };
@@ -139,6 +143,9 @@
             <>
                 <link rel="stylesheet" href="" />
                 <LoginForm />
+
+               
+                
             </>
         );
     };

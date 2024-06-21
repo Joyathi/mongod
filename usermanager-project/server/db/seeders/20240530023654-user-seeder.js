@@ -12,9 +12,8 @@ module.exports = {
             {
               _id: "6673b9d6919318ee8b7e338a",
               name: "manu",
-              // lastname: "Varghese",
               gender: "Male",
-              mobile_no: "9874563210",
+              mobile_no: "9874573310",
               email:"manu12@gmail.com",
               password : "$2y$10$B25QiuCCKFgUHfVWFNXhU.OmJFHMjBhMYA5EKVET.xqIKA4VIkmk.",       //manu@12
               user_type : "6668bcc6a10df1c8ac10c153"

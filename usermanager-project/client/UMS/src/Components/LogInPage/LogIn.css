@@ -56,7 +56,13 @@ button {
     display: flex;
     justify-content: center;
 }
-
+.Aa{
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    font-size: small;
+    
+}
 button:hover{
     background-color: #9acecb81;
 }

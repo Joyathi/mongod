@@ -14,7 +14,7 @@ exports.sendEmail = async function (emails, subject, content) {
         port,
         secure: port == 465 ? true : false, // true for 465, false for other ports
         auth: {
-          user: "f750dba817e3e0",
+          user: "b82bf8730a34c4",
           pass: "9180c28c47a7f6",
         },
       });
